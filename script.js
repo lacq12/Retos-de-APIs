@@ -11,7 +11,7 @@ let currentQuery = "";
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   page = 1;
-  currentQuery = input.value;
+  currentQuery = input.value.trim();
   buscarNoticias();
 });
 
@@ -33,10 +33,17 @@ function buscarNoticias() {
   fetch(`https://newsapi.org/v2/everything?q=${encodeURIComponent(currentQuery)}&page=${page}&pageSize=${pageSize}&apiKey=${API_KEY}`)
     .then(res => res.json())
     .then(data => {
+      console.log(data); // 👈 MUY IMPORTANTE PARA DEPURAR
+
+      if (data.status !== "ok") {
+        container.innerHTML = "❌ Error con la API: " + data.message;
+        return;
+      }
+
       mostrarNoticias(data.articles);
     })
     .catch(error => {
-      container.innerHTML = "❌ Error al cargar noticias.";
+      container.innerHTML = "❌ Error de conexión.";
       console.error(error);
     });
 }
