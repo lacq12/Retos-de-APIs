@@ -1,4 +1,4 @@
-const API_KEY = ""; // Coloca aquí tu API Key de NewsAPI
+const API_KEY = "ab455107d9d64e8085381bcbd2570100"; 
 
 const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
