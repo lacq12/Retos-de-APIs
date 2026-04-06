@@ -30,7 +30,7 @@ document.getElementById("prev").addEventListener("click", () => {
 function buscarNoticias() {
   container.innerHTML = "🔄 Cargando noticias...";
 
-  fetch(`https://newsapi.org/v2/everything?q=${currentQuery}&language=es&page=${page}&pageSize=${pageSize}&apiKey=${API_KEY}`)
+  fetch(`https://newsapi.org/v2/everything?q=${encodeURIComponent(currentQuery)}&page=${page}&pageSize=${pageSize}&apiKey=${API_KEY}`)
     .then(res => res.json())
     .then(data => {
       mostrarNoticias(data.articles);
